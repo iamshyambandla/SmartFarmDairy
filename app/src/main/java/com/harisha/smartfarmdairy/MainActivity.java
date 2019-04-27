@@ -54,20 +54,9 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(getApplicationContext()).setTitle("Delete").setMessage("Are you sure to Delete?").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        helper.deleteAll();
-                        chart.invalidate();
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
+            public void onClick(View v) {
+                helper.deleteAll();
+                chart.invalidate();
             }
         });
 
@@ -98,7 +87,50 @@ public class MainActivity extends AppCompatActivity
         });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getData();
+            Cursor res=helper.getexpenses();
+            if (res.getCount()==0){
+                Toast.makeText(getApplicationContext(),"No entries",Toast.LENGTH_SHORT).show();
+            }else {
+                sedds=0;
+                fert=0;
+                pest=0;
+                eam=0;
+                wages=0;
+                others=0;
+                StringBuffer buffer=new StringBuffer();
+                while (res.moveToNext()){
+                    sedds=sedds+res.getInt(0);
+                    fert=fert+res.getInt(1);
+                    pest=pest+res.getInt(2);
+                    eam=eam+res.getInt(3);
+                    wages=wages+res.getInt(4);
+                    others=others+res.getInt(5);
+                }
+                expenditure=sedds+fert+pest+eam+wages+others;
+            }
+            Cursor cursor=helper.getincome();
+            if (cursor.getCount()==0){
+
+            }else {
+                income=0;
+                while (cursor.moveToNext()){
+                    income=income+cursor.getInt(0);
+                }
+            }
+            addDataSet();
+            if (income!=0&&expenditure!=0){
+                int profit=income-expenditure;
+                if (profit>0){
+                    String text="Profit is "+String.valueOf(profit);
+                    Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+                }else {
+                    profit=-profit;
+                    String text="Loss is "+String.valueOf(profit);
+                    Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+                }
+            }
+
+
     }
     private void addDataSet () {
 
@@ -230,10 +262,15 @@ public class MainActivity extends AppCompatActivity
             Intent intent=new Intent(MainActivity.this,Income.class);
             startActivity(intent);
         }else if (id == R.id.calculator) {
-
+            Intent intent=new Intent(MainActivity.this,Calculator.class);
+            startActivity(intent);
         }
         else if (id == R.id.equipments) {
-
+            Intent intent=new Intent(MainActivity.this,Equipment.class);
+            startActivity(intent);
+        }else if (id == R.id.weather) {
+            Intent intent=new Intent(MainActivity.this,Weather.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

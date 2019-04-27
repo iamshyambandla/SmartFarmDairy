@@ -6,20 +6,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/addexpenses"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/expenses"
             android:title="Add Expenses" />
         <item
             android:id="@+id/addincome"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/income"
             android:title="Add Income" />
         <item
             android:id="@+id/calculator"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/calculator"
             android:title="Calculator" />
         <item
             android:id="@+id/equipments"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/equip"
             android:title="Equipments" />
+        <item
+            android:id="@+id/weather"
+            android:icon="@drawable/weather"
+            android:title="Weather" />
 
     </group>
 
