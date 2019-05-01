@@ -24,6 +24,7 @@ public class Income extends AppCompatActivity {
                boolean res= helper.insertincome(Integer.parseInt(income.getText().toString()));
                 if (res){
                     Toast.makeText(Income.this, "added successfully", Toast.LENGTH_SHORT).show();
+                    income.setText("");
                 }else{
                     Toast.makeText(Income.this, "error adding data", Toast.LENGTH_SHORT).show();
                 }

@@ -66,7 +66,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:id="@+id/note"
-        android:inputType="number"
+        android:inputType="text"
         android:layout_marginHorizontal="20dp"
         android:hint="Note"/>
         <Button

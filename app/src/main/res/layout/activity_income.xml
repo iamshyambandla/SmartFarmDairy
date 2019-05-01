@@ -16,6 +16,7 @@
             android:layout_height="60dp"
             android:id="@+id/income"
             android:hint="Income"
+            android:inputType="number"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="10dp"
             />
