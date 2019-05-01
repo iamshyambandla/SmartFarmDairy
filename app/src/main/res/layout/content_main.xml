@@ -18,6 +18,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:textColor="#fff"
         android:background="@color/colorPrimary"
         android:textAlignment="center"
         android:id="@+id/bc"

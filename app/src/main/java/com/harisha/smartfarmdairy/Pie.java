@@ -36,6 +36,7 @@ public class Pie extends AppCompatActivity {
     private DatabaseHelper helper;
     private int[] yData = {5};
     StringBuilder builder;
+    String text;
     private TextView textView;
     private String[] xData = {"Seeds", "Fertilizers", "Pesticides", "bills", "Wages", "Other"};
     int sedds, fert, pest, eam, wages, others, income, expenditure;
@@ -137,6 +138,16 @@ public class Pie extends AppCompatActivity {
             AlertDialog dialog=dbuilder.create();
             dialog.show();
         }
+        if (text!=null){
+            AlertDialog.Builder dbuilder = new AlertDialog.Builder(this).setIcon(R.drawable.farmer).setTitle("Notification").setMessage(text).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog=dbuilder.create();
+            dialog.show();
+        }
     }
 
     private void addDataSet() {
@@ -183,7 +194,7 @@ public class Pie extends AppCompatActivity {
     public void getData() {
         Cursor res = helper.getexpenses();
         if (res.getCount() == 0) {
-            Toast.makeText(getApplicationContext(), "hii", Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(getApplicationContext(), "hii", Toast.LENGTH_SHORT).show();
         } else {
             sedds = 0;
             fert = 0;
@@ -233,12 +244,12 @@ public class Pie extends AppCompatActivity {
         if (income != 0 && expenditure != 0) {
             int profit = income - expenditure;
             if (profit > 0) {
-                String text = "Profit is " + String.valueOf(profit);
-                Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+                 text = "Profit is " + String.valueOf(profit);
+               // Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             } else {
                 profit = -profit;
-                String text = "Loss is " + String.valueOf(profit);
-                Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+                 text = "Loss is " + String.valueOf(profit);
+               // Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -248,27 +259,6 @@ public class Pie extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }
